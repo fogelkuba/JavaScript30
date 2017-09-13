@@ -94,11 +94,35 @@
     </div>
     <div class="item">
       <input type="checkbox">
-      <p>Don't forget to tweet your result!</p>
+      <p>Don''t forget to tweet your result!</p>
     </div>
   </div>
 
 <script>
+let first;
+let second;
+const checkboxes = document.querySelectorAll('input');
+
+let lastCheck
+
+function handleCheck(e){
+    let inBetween = false
+    if (e.shiftKey && this.checked) {
+        checkboxes.forEach(checkbox =>{
+            console.log(checkbox);
+            if (checkbox === this || checkbox ===  lastCheck) {
+                console.log('poczatek liczenia');
+                inBetween = !inBetween;
+            }
+            if (inBetween) {
+                checkbox.checked = true;
+            }
+        })
+    }
+    lastCheck = this;
+}
+checkboxes.forEach(checkbox => checkbox.addEventListener('click', handleCheck))
+
 </script>
 </body>
 </html>
